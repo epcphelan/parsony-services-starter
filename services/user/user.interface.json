@@ -1,0 +1,163 @@
+{
+  "handlers": "user.handlers.js",
+  "endpoints": [
+    {
+      "RESTUrl": "/user/create",
+      "method": "post",
+      "json_api": "user.create",
+      "desc": "Create a new user account with email address.",
+      "handler": "create",
+      "authentication": {
+        "api_key": true,
+        "session_token": false
+      },
+      "params": [
+        {
+          "param": "username",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "valid_email": true
+          }
+        },
+        {
+          "param": "password",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "min_length": "6"
+          }
+        }
+      ],
+      "errors":[
+        "record_not_created",
+        "duplicate_email"
+      ],
+      "returns": {}
+    },
+    {
+      "RESTUrl": "/user/login",
+      "method": "post",
+      "json_api": "user.login",
+      "desc": "Authenticates user and creates a new session.",
+      "handler": "login",
+      "authentication": {
+        "api_key": true,
+        "session_token": false
+      },
+      "params": [
+        {
+          "param": "username",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "valid_email": true
+          }
+        },
+        {
+          "param": "password",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "min_length": "6"
+          }
+        }
+      ],
+      "returns": {},
+      "errors":[
+        "authentication_failed"
+      ]
+    },
+    {
+      "RESTUrl": "/user/logout",
+      "method": "delete",
+      "json_api": "user.logout",
+      "desc": "Logs user out and destroys session.",
+      "handler": "logout",
+      "authentication": {
+        "api_key": true,
+        "session_token": true
+      },
+      "params": [],
+      "returns": {}
+    },
+    {
+      "RESTUrl": "/user/session",
+      "method": "get",
+      "json_api": "user.loadSession",
+      "desc": "Returns a session object if there is a valid session.",
+      "handler": "loadSession",
+      "authentication": {
+        "api_key": true,
+        "session_token": true
+      },
+      "params": [],
+      "returns": {}
+    },
+    {
+      "RESTUrl": "/user/updateEmail",
+      "method": "post",
+      "json_api": "user.updateEmail",
+      "desc": "Sets an email address for the account associated with the current session.",
+      "handler": "updateEmail",
+      "authentication": {
+        "api_key": true,
+        "session_token": true
+      },
+      "params": [
+        {
+          "param": "email",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "valid_email": true
+          }
+        }
+      ],
+      "returns": {}
+    },
+    {
+      "RESTUrl": "/user/sendConfirmEmail",
+      "method": "post",
+      "json_api": "user.sendConfirmEmail",
+      "desc": "Sends an email confirmation code to user.",
+      "handler": "sendConfirmEmail",
+      "authentication": {
+        "api_key": true,
+        "session_token": true
+      },
+      "params": [],
+      "returns": {}
+    },
+    {
+      "RESTUrl": "/user/confirmEmailWithCode",
+      "method": "post",
+      "json_api": "user.confirmEmailWithCode",
+      "desc": "Confirms the user email with code.",
+      "handler": "confirmEmailWithCode",
+      "authentication": {
+        "api_key": true,
+        "session_token": false
+      },
+      "params": [
+        {
+          "param": "email",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "valid_email": true
+          }
+        },
+        {
+          "param": "confirmationCode",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "min_length": "8"
+          }
+        }
+      ],
+      "returns": {}
+    }
+  ]
+}

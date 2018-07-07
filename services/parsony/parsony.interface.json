@@ -1,0 +1,37 @@
+{
+  "handlers": "parsony.handlers.js",
+  "endpoints": [
+    {
+      "method": "get",
+      "RESTUrl": "/api/doc",
+      "json_api": "api.documentation",
+      "handler": "getAPIDocumentation"
+    },
+    {
+      "method": "get",
+      "RESTUrl": "/api/helloworld",
+      "json_api": "api.helloworld",
+      "handler": "helloWorld",
+      "returns": {
+        "data": [
+          {
+            "message": "Hello World"
+          }
+        ]
+      }
+    },
+    {
+      "RESTUrl": "/parsony/error",
+      "method": "get",
+      "json_api": "parsony.error",
+      "desc": "Default error response object.",
+      "handler": "error",
+      "authentication": {
+        "api_key": false,
+        "session_token": false
+      },
+      "params": [],
+      "returns": {}
+    }
+  ]
+}

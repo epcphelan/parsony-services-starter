@@ -1,0 +1,67 @@
+{
+  "UNAUTHORIZED_ACCESS": {
+    "code": 403,
+    "type": "unauthorized_action",
+    "msg": "User not permitted to perform action."
+  },
+  "NOT_UPDATED": {
+    "code": 500,
+    "type": "record_not_saved",
+    "msg": "Changes were unable to be committed to database."
+  },
+  "NOT_CREATED": {
+    "code": 500,
+    "type": "record_not_created",
+    "msg": "Record could not be created in database."
+  },
+  "DUPLICATE_EMAIL": {
+    "code": 500,
+    "type": "duplicate_email",
+    "msg": "Email address associated with an existing account."
+  },
+  "AUTHENTICATION_ERROR": {
+    "code": 401,
+    "type": "authentication_failed",
+    "msg": "Email or password were incorrect."
+  },
+  "NOT_DELETED": {
+    "code": 500,
+    "type": "record_not_deleted",
+    "msg": "Record could not be removed from database."
+  },
+  "NOT_FOUND": {
+    "code": 404,
+    "type": "record_not_found",
+    "msg": "Could not find a record matching supplied arguments."
+  },
+  "EMAIL_NOT_SENT": {
+    "code": 500,
+    "type": "email_not_sent",
+    "msg": "Could not send email."
+  },
+  "PERMISSIONS_ERROR": {
+    "code": 401,
+    "type": "permissions_error",
+    "msg": "Could not establish rights to perform action."
+  },
+  "DUPLICATE_ENTITY": {
+    "code": 409,
+    "type": "duplicate_error",
+    "msg": "Attempted to create duplicate entity."
+  },
+  "UNSUPPORTED_ACTION": {
+    "code": 500,
+    "type": "unsupported_action",
+    "msg": "The operation could not be performed on the supplied arguments."
+  },
+  "PAYLOAD_ERROR": {
+    "code": 400,
+    "type": "payload_error",
+    "msg": null
+  },
+  "NOT_IMPLEMENTED": {
+    "code": 501,
+    "type": "not_implemented",
+    "msg": "No handler has been assigned to this API endpoint."
+  }
+}

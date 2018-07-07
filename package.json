@@ -1,0 +1,18 @@
+{
+  "name": "parsony-framework",
+  "description": "API Framework for RPC-JSON APIs",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "parsony": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
+  },
+  "scripts": {
+    "test": "nyc mocha --recursive --exit --timeout 5000"
+  }
+}

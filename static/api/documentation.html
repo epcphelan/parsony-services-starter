@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>API Documentation</title>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        body{
+            color:#666;
+            font-size:12px;
+            font-family: arial, sans-serif;
+        }
+        .signature {
+            margin-bottom:30px;
+            border:1px solid lightgray;
+            width:900px;
+            padding:15px;
+        }
+        .json_method{
+            color:#f90;
+            font-size:20px;
+        }
+        .section{
+            font-weight: bold;
+        }
+        .authentication{
+            float:right;
+            border: 1px solid #f1f1f1;
+            padding: 5px;;
+        }
+        .authentication table{
+            width:180px;
+        }
+
+        .parameters .content{
+            margin-left: 20px;
+        }
+        .param{
+            float:left;
+            margin:20px;
+            border-left:1px solid #ccc;
+            padding:10px;
+            min-height:90px;
+        }
+        .var{
+            font-weight: bold;
+            color:darkslateblue;
+        }
+        .rule_value{
+            color:#f90;
+        }
+        .http_method{
+            font-style: italic;
+        }
+        .json_response {
+            margin:10px;
+            background: #f1f1f1;
+            color:#222;
+            padding:20px;
+
+        }
+        .description{
+            margin-bottom: 20px;
+            padding:20px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:'/api/doc',
+                dataType:'text'
+            }).done(function(data){
+                var data = JSON.parse(data);
+                var output = '';
+                var response_data = data.data;
+
+                for(var method in response_data){
+	                var sig = response_data[method];
+                    var url = sig['RESTUrl'];
+                    var json_method = sig['json_api'];
+                    var http_method = sig['method'];
+                    var desc = (sig['desc']) ? (sig['desc']) : 'No Description';
+                    var returns = (sig['returns'])?  JSON.stringify(sig['returns'],null,4) : '';
+                    if(http_method){
+                        http_method = http_method.toUpperCase();
+                    }
+                    var auth= sig['authentication'];
+                    if(auth){
+                        if(auth.hasOwnProperty('api_key')){
+                            var api_key = (auth['api_key'])? 'Yes' :'No';
+                        }
+                        if(auth.hasOwnProperty('session_token')){
+                            var session_token = (auth['session_token'])? 'Yes' : 'No';
+                        }
+                    }
+
+                    var params = sig['params'];
+                    if(params){
+                        var parameters = param_parser(params);
+                    }
+                    output +=
+                            '<div class="signature">'+
+                                '<span class="json_method">' + json_method + '</span> <span class = "http_method" > @ '+ http_method + ': '+ url + '</span>'+
+                                '<div class="authentication"><div class="section">Authentication:</div>'+
+                                    '<table> <tr><td>API Key:</td><td>'+ api_key + '</td><tr><td>Session Token:</td><td>' + session_token +'</td></tr></table>'+
+                                '<div style="clear:both"/></div>'+
+                                '<div class="description">' + desc + '</div>'+
+                                '<div class="parameters"><span class="section">Parameters: (*required)</span><div class="content">' + parameters + '<div style="clear:both"/></div></div>' +
+                                '<div class="returns"><span class="section">Returns: </span><div class="json_response"><pre>'+ returns +'</pre></div></div>'+
+                            '</div>';
+
+                }
+                $('body').html(output);
+            })
+            function param_parser(params){
+                var parameters='';
+                for(var i=0; i<params.length;i++){
+                    var validation ='';
+                    if(params[i]['validation']){
+                        for(var rule in params[i]['validation']){
+                            var ruleout = ''
+                            if(rule=='param_array'){
+                                ruleout =param_parser(params[i]['validation'][rule]);
+                            }
+                            else{
+                                ruleout = params[i]['validation'][rule];
+                            }
+                            validation +='<li>' + rule.replace('_',' ')+ ': <span class="rule_value">' + ruleout  + '</span></li>';
+                        }
+                    }
+                    var required = (params[i]['required']) ? ' *' : ''
+                    parameters += '<div class="param"><span class="var">'+params[i]['param']+required+'</span>'+
+                    '<ul>' + validation +'</ul>' +
+                    '</div>';
+                }
+                return parameters;
+            }
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
