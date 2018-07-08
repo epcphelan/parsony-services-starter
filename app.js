@@ -3,7 +3,7 @@
 const path = require('path');
 
 global.base = __dirname + path.sep;
-global.parsony = require('/Users/ericphelan/Desktop/ParsonyFramework/parsony');
+global.parsony = require('parsony');
 
 
 const settings = {
