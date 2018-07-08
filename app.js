@@ -16,8 +16,7 @@ const settings = {
     services:     path.join(__dirname, 'services'),
     scheduled:    path.join(__dirname, 'scheduled'),
     www:          path.join(__dirname, 'static'),
-    templates:    path.join(__dirname, 'templates'),
-    errors:       [path.join(__dirname,'lib','errors.json')]
+    templates:    path.join(__dirname, 'templates')
   }
 };
 try{
