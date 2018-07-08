@@ -1,0 +1,41 @@
+{
+  "local":{
+    "api_endpoint" : "json-api",
+    "http_port" : 8070,
+    "logging" : false,
+    "api_debug": false,
+    "db":{
+      "host": "localhost",
+      "port": 8889,
+      "username": "",
+      "password": "",
+      "database": "",
+      "dialect": "mysql",
+      "max_connections" : 5,
+      "operatorsAliases": false,
+      "logging":false
+    },
+    "emails":{
+      "debugRecipient":"@gmail.com",
+      "system" : {
+        "sender" : {
+          "from": "John Doe <name@gmail.com>",
+          "service": "Gmail",
+          "host": "smtp.gmail.com",
+          "port": 465,
+          "secure": true,
+          "auth": {
+            "user": "",
+            "pass": ""
+          }
+        }
+      }
+    },
+    "twilio":{
+      "phoneNumber":"+15554561111",
+      "sid" : "",
+      "token" : "",
+      "debugRecipient": "+15554561111"
+    }
+  }
+}
