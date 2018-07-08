@@ -3,7 +3,7 @@
     "api_endpoint" : "json-api",
     "http_port" : 8070,
     "logging" : false,
-    "api_debug": false,
+    "api_debug": true,
     "db":{
       "host": "localhost",
       "port": 8889,
