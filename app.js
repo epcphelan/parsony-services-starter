@@ -19,13 +19,21 @@ const settings = {
     templates:    path.join(__dirname, 'templates')
   }
 };
+
 try{
   parsony.init(settings);
-  parsony.start().then(app =>{});
+  parsony.start()
+    .then(app =>{})
+    .catch(e => {
+      console.error(e.message);
+      process.exit();
+    });
 }
 catch(e){
-  console.log(e);
+  console.error(e.message);
+  process.exit();
 }
+
 
 
 
