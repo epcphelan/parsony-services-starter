@@ -295,11 +295,13 @@ Example:
 
 Key | Value(s) 
 --- | ---
-is_type | {string|number|boolean|date}
-valid_email | boolean
-is_array | boolean
-is_url | boolean
+is_type | {string,number,boolean,date}
+valid_email | {bool}
+is_array | {bool}
+is_url | {bool}
 regex | {regular expression}
+in_set | {[values]},
+is_json | {bool}
 
 
 
