@@ -344,9 +344,9 @@ Example:
 exports.addFollower = async data => {
   // * = required
   const { 
-    userToFollowId,// type: number *
-    privateRelationship,// type: boolean *
-    sessionObj: { userId }// from session 
+    userToFollowId, // type: number *
+    privateRelationship, // type: boolean *
+    sessionObj: { userId } // from session 
   } = data;
 
   try{
