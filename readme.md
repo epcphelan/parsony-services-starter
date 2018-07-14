@@ -336,8 +336,56 @@ Each endpoint contract specifies a handler. In theory, it would be possible
 to point multiple contracts to a single contract. This could be useful
 for defaulting responses.
 
-A handler is an ```async``` function that either returns either an object, 
+A handler is an ```async``` function that either returns either an object 
 or throws an Error. 
+
+Example:
+```js
+/**
+ * Adds a follower to the user.
+ * @param {object} data - Parsony data object
+ * @return {Promise.<*>}
+ * @example
+  [
+  {
+    "param": "followeeId",
+    "required": true,
+    "validation": {
+      "is_type": "number"
+    }
+  },
+  {
+    "param": "private",
+    "required": true,
+    "validation": {
+      "is_type": "boolean"
+    }
+  }
+]
+ */
+exports.addFollower = async data => {
+  // * = required
+  const { 
+ userToFollowId,// type: number * 
+ privateRelationship,// type: boolean * 
+ sessionObj: { userId }// from session 
+ } = data;
+
+  try{
+    /**
+     * @todo Implement method
+     */
+  } catch(e){
+    throw makeStandardError(ERROR)
+  }
+  
+  return {
+   userToFollowId, 
+   privateRelationship,
+ userId 
+ };
+};
+```
 
 Handlers should always throw an augmented error object containing a code, msg, type and detail properties.
 
