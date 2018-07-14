@@ -50,7 +50,7 @@ Parsony uses Sequelize ORM (V4) which supports multiple databases.
 The default and most tested implementation uses MySQL. You will be
 able to pass connection parameters via the configs file.
 
-####Configs:
+#### DB Configs:
 ```$xslt
  "db":{
       "host": "localhost",
@@ -71,7 +71,7 @@ to a local instance of Redis, though a remote Redis server, for example, via AWS
 ElastiCache can also be configured via configs.
 
 
-#### Configs:
+#### Cache Configs:
 
 ```$xslt
     "redis":{
