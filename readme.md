@@ -324,7 +324,7 @@ min_length / max_length | {int}
 
 
 ##### Use Command-line Tools
-Parsony CLI can help you create a new contract and handler stub through a series
+Parsony CLI can help you create a new contract and handler stub (as seen below) through a series
 of questions. In the root directory of your WebServices, run :
 ```$xslt
 $ parsony +
@@ -393,7 +393,7 @@ const { http:{makeStandardError}} = parsony.getBundle();
 const errorObj = {
         "code": 401,
         "type": "authentication_failed",
-        "msg": "Email or password were incorrect."
+        "message": "Email or password were incorrect."
       }
 
 throw new makeStandardError(errorObj,"Some extra details can go here.")
@@ -401,3 +401,41 @@ throw new makeStandardError(errorObj,"Some extra details can go here.")
 
 Parsony WebServer starter provides many standard errors in ```lib/errors.json```
 
+
+## Parsony Modules
+Parsony exposes it's models, helper functions, cache and other modules in a bundle
+which is available via getBundle()
+
+```
+    {
+        env             // current env. default 'local'
+        models          // models accessible by name
+        debugMode       // bool
+        configs         // initial configs
+        dbPool          // db pool for making raw sql queries
+        db              // all db methods
+        http,           // contains makeStandardError
+        auth,           // auth functions
+        utils,          // utilities
+        email,          // emailer
+        sms,            // sms sender
+        app,            // express app (req, res)
+        api,            // compiled contracts
+        errors          // core error objects
+    }
+```
+
+### Models
+Models are best used by destructuring the models object retrieved via .getBundle()
+
+```js
+const { models } = parsony.getBundle();
+
+const {User} = models;
+return User.find({
+  where:{
+    id:12345
+  }
+});
+
+```
