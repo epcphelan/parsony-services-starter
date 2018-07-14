@@ -15,6 +15,12 @@
       "operatorsAliases": false,
       "logging":false
     },
+    "redis":{
+      "host": "127.0.0.1",
+      "port": 6379,
+      "path": null,
+      "url": null
+    },
     "emails":{
       "debugRecipient":"@gmail.com",
       "system" : {

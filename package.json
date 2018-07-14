@@ -13,6 +13,7 @@
     "nyc": "^12.0.2"
   },
   "scripts": {
-    "test": "nyc mocha --recursive --exit --timeout 5000"
+    "test": "nyc mocha --recursive --exit --timeout 5000",
+    "start": "node app.js"
   }
 }
