@@ -431,11 +431,41 @@ Models are best used by destructuring the models object retrieved via .getBundle
 ```js
 const { models } = parsony.getBundle();
 
-const {User} = models;
-return User.find({
-  where:{
-    id:12345
-  }
-});
+exports.getUser = async (id) =>{
+  const { User } = models;
+  return await User.find({
+    where:{
+      id
+    }
+  });
+}
+```
 
+### DB Pool
+Get a connection from the DB pool to perform DB queries directly.
+
+```js
+const {dbPool} = parsony.getBundle();
+
+exports.getUser = async(id)=>{
+  return new Promise((resolve, reject) => {
+    dbPool.getConnection((err, conn) => {
+      if (err) {
+        conn.release();
+        reject(err);
+      } else {
+        const stmt = 'SELECT * FROM Users WHERE id=?';
+        conn.query(stmt, [id], (err, rows, fields) => {
+          if (err) {
+            conn.release();
+            reject(err);
+          } else {
+            conn.release();
+            resolve(rows, fields);
+          }
+        });
+      }
+    });
+  });
+}
 ```
