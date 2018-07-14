@@ -1,21 +1,21 @@
 # Parsony Web Services Framework
 
 Parsony WebServices framework allows for rapid development of web-services
-based application in conjunction with Parsony WebApp. Parsony automatically
-exposes both a **REST-ish** endpoint for each method as well as access via 
+based application in conjunction with Parsony WebApp automatically
+exposing both a **REST-ish** endpoint for each method as well as access via 
 **JSON/RPC** calls to a single endpoint.
 
-Parsony allows developers to implement an API endpoint via **contracts** and **handlers**.
+#### Parsony allows developers to implement an API endpoint via _contracts_ and _handlers_.
  
-The contracts ensure robust validation, client authorization and end-user authentication.
-Contracts _automagically_ generate rich documentation, ensure API response formats
+Contracts ensure robust validation, client authorization and end-user authentication.
+They _automagically_ generate rich documentation, ensure API response formats
 and provide endpoint-level documentation hinting when run in debug mode.
  
 Parsony extracts method variables as well as a session object which are passed to the 
 handler function. 
 
-Instead of worrying about routing, error handling, argument checking and validation, 
-a developer can focus purely on business logic.
+When implementing a handler a developer can focus purely on business logic 
+instead of worrying about routing, error handling, argument checking and validation.
 
 Parsony also adds API security by implementing encrypted request payload signatures.
 The client libraries for implement complimentary signing and works out-of-the-box with 
