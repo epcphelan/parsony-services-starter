@@ -302,8 +302,8 @@ is_url | {bool}
 in_set | [values,as,array],
 valid_email | {bool}
 regex | {string} (RegEx pattern)
-min_length | {int}
-max_length | {int}
+min_length / max_length | {int}
+
 
 ##### Use Command-line Tools
 Parsony CLI can help you create a new contract and handler stub through a series
