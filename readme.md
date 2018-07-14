@@ -295,15 +295,15 @@ Example:
 
 Key | Value(s) 
 --- | ---
-is_type | {string,number,boolean,date}
-valid_email | {bool}
+is_type | {string} in (string, number, boolean, date)
 is_array | {bool}
-is_url | {bool}
-regex | {regular expression}
-in_set | {[values]},
 is_json | {bool}
-
-
+is_url | {bool}
+in_set | [values,as,array],
+valid_email | {bool}
+regex | {string} (RegEx pattern)
+min_length | {int}
+max_length | {int}
 
 ##### Use Command-line Tools
 Parsony CLI can help you create a new contract and handler stub through a series
