@@ -331,5 +331,39 @@ $ parsony +
 ```
 
 
+#### Handlers
+Each endpoint contract specifies a handler. In theory, it would be possible
+to point multiple contracts to a single contract. This could be useful
+for defaulting responses.
 
+A handler is an ```async``` function that either returns either an object, 
+or throws an Error. 
+
+Handlers should always throw an augmented error object containing a code, msg, type and detail properties.
+
+```js
+  const e = new Error('Oops');
+  e.msg = 'Oh no.';
+  e.code = '500';
+  e.type = 'internal_error';
+  e.detail = 'A strange thing has happened.';
+```
+
+Parsony provides a convenience method of the http module called makeStandardError.
+It is accessible via:
+```js
+const { http:{makeStandardError}} = parsony.getBundle();
+
+// Pass an object to makeStandardError(error[,detail])
+
+const errorObj = {
+        "code": 401,
+        "type": "authentication_failed",
+        "msg": "Email or password were incorrect."
+      }
+
+throw new makeStandardError(errorObj,detail)
+```
+
+Parsony WebServer starter contains many standard errors
 
