@@ -295,7 +295,7 @@ Example:
 
 Key | Value(s) 
 --- | ---
-is_type | {string, number, boolean, date}
+is_type | {string|number|boolean|date}
 valid_email | boolean
 is_array | boolean
 is_url | boolean
