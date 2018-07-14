@@ -347,7 +347,7 @@ exports.addFollower = async data => {
     userToFollowId,// type: number *
     privateRelationship,// type: boolean *
     sessionObj: { userId }// from session 
- } = data;
+  } = data;
 
   try{
     /**
