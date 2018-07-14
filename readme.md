@@ -185,25 +185,26 @@ This may be the case if you use a third-party mail service such as Mailchimp
 }
 ```
 
-##Usage
+## Usage
 
-###Models
+### Models
 Add new models to the ```models/``` directory. Advanced documentation 
 on defining models can be found at [sequelize](http://docs.sequelizejs.com/manual/tutorial/models-definition.html).
 
 A basic models looks like:
 ```js
+"use strict";
+
 module.exports = (sequelize, DataTypes) => {
-    let User = sequelize.define("User", {
-        username:  {type: DataTypes.STRING, unique: true}
-    },{
-    	paranoid:true
-		});
-    User.associate = (models) => {
-			User.hasOne(models.UserAuth,{onDelete:'cascade'});
-			User.hasMany(models.UserSessions,{onDelete:'cascade'});
-		};
-    return User;
+  let UserProfile = sequelize.define("UserProfile", {
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    profileImage: DataTypes.STRING
+  });
+  UserProfile.associate = models => {
+    UserProfile.belongsTo(models.User);
+  };
+  return UserProfile;
 };
 ```
 
