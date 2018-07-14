@@ -190,9 +190,9 @@ This may be the case if you use a third-party mail service such as Mailchimp
 }
 ```
 
-## Usage
+# Usage
 
-### Models
+## Models
 Add new models to the ```models/``` directory. These will be automatically
 synchronized on Parsony startup. 
 
@@ -227,7 +227,7 @@ To create a basic model stub, use the Parsony CLI and run
 $ parsony +m
 ```
 
-### Service
+## Services
 
 Services help you organize your endpoints into related functionality. To
 create a new service, and a new directory to ```services/```.
@@ -242,7 +242,7 @@ Create a new service with Parsony-CLI. In the root directory of your WebServices
 $ parsony +s
 ```
 
-#### Interface Definitions
+### Interface Definitions
 An interface file defines the API contract as well as the method handler associated
 with each endpoint.
 
@@ -331,7 +331,7 @@ $ parsony +
 ```
 
 
-#### Handlers
+### Handlers
 Each endpoint contract specifies a handler. In theory, it would be possible
 to point multiple contracts to a single contract. This could be useful
 for defaulting responses.
@@ -362,8 +362,8 @@ const errorObj = {
         "msg": "Email or password were incorrect."
       }
 
-throw new makeStandardError(errorObj,detail)
+throw new makeStandardError(errorObj,"Some extra details can go here.")
 ```
 
-Parsony WebServer starter contains many standard errors
+Parsony WebServer starter provides many standard errors in ```lib/errors.json```
 
