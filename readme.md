@@ -1,11 +1,13 @@
 # Parsony Web Services Framework
 
 Parsony WebServices framework allows for rapid development of web-services
-based application in conjunction with Parsony WebApp. 
+based application in conjunction with Parsony WebApp. Parsony automatically
+exposes both a **REST-ish** endpoint for each method as well as access via 
+**JSON/RPC** calls to a single endpoint.
 
 Parsony allows developers to define an API endpoint via contracts and handlers 
 The contracts ensure robust validation, client authorization and end-user authentication.
-Contracts automagically generates rich documentation, ensures API response formats
+Contracts _automagically_ generates rich documentation, ensures API response formats
 and provides endpoint-level documentation hinting when run in debug mode.
  
 Parsony extracts method variables as well as a session object which are passed to the 
@@ -221,3 +223,63 @@ To create a basic model stub, use the Parsony CLI and run
 ```$xslt
 $ parsony +m
 ```
+
+### Service
+
+Services help you organize your endpoints into related functionality. To
+create a new service, and a new directory to ```services/```.
+
+A service requires two files:
+* {service}.interface.js
+* {service}.handlers.js
+
+#### Interface Definitions
+An interface file defines the API contract as well as the method handler associated
+with each endpoint.
+
+Example:
+```$xslt
+{
+  "handlers": "user.handlers.js",
+  "endpoints": [
+    {
+      "json_api": "user.create",
+      "rest_url": "/user/create",
+      "method": "post",
+      "desc": "Create a new user account with email address.",
+      "handler": "create",
+      "authentication": {
+        "api_key": true,
+        "session_token": false
+      },
+      "params": [
+        {
+          "param": "username",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "valid_email": true
+          }
+        },
+        {
+          "param": "password",
+          "required": true,
+          "validation": {
+            "is_type": "string",
+            "min_length": "6"
+          }
+        }
+      ],
+      "errors":[
+        "record_not_created",
+        "duplicate_email"
+      ],
+      "returns": {
+        userId: 12345
+      }
+    },
+    ...
+  ]
+}
+```
+
