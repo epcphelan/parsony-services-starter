@@ -341,33 +341,11 @@ or throws an Error.
 
 Example:
 ```js
-/**
- * Adds a follower to the user.
- * @param {object} data - Parsony data object
- * @return {Promise.<*>}
- * @example
-  [
-  {
-    "param": "followeeId",
-    "required": true,
-    "validation": {
-      "is_type": "number"
-    }
-  },
-  {
-    "param": "private",
-    "required": true,
-    "validation": {
-      "is_type": "boolean"
-    }
-  }
-]
- */
 exports.addFollower = async data => {
   // * = required
   const { 
- userToFollowId,// type: number * 
- privateRelationship,// type: boolean * 
+ userToFollowId,// type: number *
+ privateRelationship,// type: boolean *
  sessionObj: { userId }// from session 
  } = data;
 
@@ -380,9 +358,9 @@ exports.addFollower = async data => {
   }
   
   return {
-   userToFollowId, 
+   userToFollowId,
    privateRelationship,
- userId 
+ userId
  };
 };
 ```
