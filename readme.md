@@ -291,7 +291,25 @@ Example:
   ]
 }
 ```
-##### Available validations
+##### Definitions
+```$xslt
+handlers                // Name of handlers file in same directory
+json_api                // method name passed in request to JSON/RPC
+rest_url                // REST-ish API endpoint
+method                  // HTTP method: post, get, put, delete
+desc                    // Short method description
+handler                 // Name of handler function
+api_key                 // If required to access endpoint. If true, payload must be signed.
+session_token           // If required to access endpoint.
+errors                  // Array of error types. See errors for more info.
+returns                 // A sample response object.
+
+```
+
+##### Available Validations
+Any combination of the following rules can be applied to an endpoint parameter.
+Be careful: certain combinations cannot be satisfied, meaning that all
+requests will be rejected!
 
 Key | Value(s) 
 --- | ---
@@ -299,7 +317,7 @@ is_type | {string} in (string, number, boolean, date)
 is_array | {bool}
 is_json | {bool}
 is_url | {bool}
-in_set | [values,as,array],
+in_set | ["values", "as", "array"]
 valid_email | {bool}
 regex | {string} (RegEx pattern)
 min_length / max_length | {int}
