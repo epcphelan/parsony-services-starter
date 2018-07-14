@@ -236,6 +236,12 @@ A service requires two files:
 * {service}.interface.js
 * {service}.handlers.js
 
+##### Use Command-line Tools
+Create a new service with Parsony-CLI. In the root directory of your WebServices, run :
+```$xslt
+$ parsony +s
+```
+
 #### Interface Definitions
 An interface file defines the API contract as well as the method handler associated
 with each endpoint.
@@ -269,7 +275,7 @@ Example:
           "required": true,
           "validation": {
             "is_type": "string",
-            "min_length": "6"
+            "min_length": 6
           }
         }
       ],
@@ -285,4 +291,25 @@ Example:
   ]
 }
 ```
+##### Available validations
+
+Key | Value(s) 
+--- | ---
+is_type | {string, number, boolean, date}
+valid_email | boolean
+is_array | boolean
+is_url | boolean
+regex | {regular expression}
+
+
+
+##### Use Command-line Tools
+Parsony CLI can help you create a new contract and handler stub through a series
+of questions. In the root directory of your WebServices, run :
+```$xslt
+$ parsony +
+```
+
+
+
 
