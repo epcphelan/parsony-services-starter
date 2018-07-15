@@ -1,5 +1,3 @@
-// get configs and set globally
-
 const path = require('path');
 
 global.base = __dirname + path.sep;
