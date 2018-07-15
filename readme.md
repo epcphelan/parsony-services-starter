@@ -146,6 +146,7 @@ This may be the case if you use a third-party mail service such as Mailchimp
   "local": {
     "api_endpoint": "json-api",     // single endpoint for RPC-based requests
     "http_port": 8070,
+    "logging": true,                // true, print all req, res to console.log
     "api_debug": true,              // true, passing hint:true with no args returns method doc
     "db": {
       "host": "localhost",
@@ -416,11 +417,8 @@ which is available via getBundle()
         db              // all db methods
         http,           // contains makeStandardError
         auth,           // auth functions
-        utils,          // utilities
         email,          // emailer
         sms,            // sms sender
-        app,            // express app (req, res)
-        api,            // compiled contracts
         errors          // core error objects
     }
 ```
@@ -441,26 +439,26 @@ exports.getUser = async (id) =>{
 }
 ```
 
-### DB Pool
+### DB Pool & DB
 Get a connection from the DB pool to perform DB queries directly.
-
+* getConnection(fn(err,callback){})
 ```js
-const {dbPool} = parsony.getBundle();
+const { dbPool } = parsony.getBundle();
 
 exports.getUser = async(id)=>{
+  const stmt = 'SELECT * FROM Users WHERE id=?';
+  
   return new Promise((resolve, reject) => {
     dbPool.getConnection((err, conn) => {
       if (err) {
         conn.release();
         reject(err);
       } else {
-        const stmt = 'SELECT * FROM Users WHERE id=?';
         conn.query(stmt, [id], (err, rows, fields) => {
+          conn.release();
           if (err) {
-            conn.release();
             reject(err);
           } else {
-            conn.release();
             resolve(rows, fields);
           }
         });
@@ -469,3 +467,92 @@ exports.getUser = async(id)=>{
   });
 }
 ```
+
+Alternatively, **DB** provides an execute and query method which accepts a stmt and arguments.
+* execute(stmt,[args]) [async]
+* query(stmt, [args]) [async]
+
+```js
+const { db } = parsony.getBundle();
+
+exports.getUser = async (id) => {
+  const stmt = 'SELECT * FROM Users WHERE id=?';
+  return await db.query(stmt,[id]);
+}
+
+exports.updateUserProfile = async(id, firstName, lastName) => {
+  const stmt = 'UPDATE Users SET firstName = ?, lastName = ? WHERE id = ?';
+  return await db.execute(stmt,[firstName, lastName, id]);
+}
+```
+
+### HTTP
+Provides makeStandardError() - See above.
+
+### Auth
+Authentication and session methods:
+* checkCredentials(username, password) [async]
+* getSession(sessionToken) [async]
+* createSession(userId) [async]
+* destroySession(sessionToken) [async]
+
+### EMail
+Parsony Emailer - send HTML transactional emails using 
+* sendTemplateEmail(recipient, subject, mergeData, template [, sender]) [async]
+
+Add HTML templates to ```templates/```.
+Optional argument _sender_ is an object, and defaults to sender in configs: 
+```
+{
+  "from": "John Doe <name@gmail.com>",
+  "service": "Gmail",
+  "host": "smtp.gmail.com",
+  "port": 465,
+  "secure": true,
+  "auth": {
+    "user": "",
+    "pass": ""
+  }
+}
+```
+
+Example: templates/hello.html
+```html
+<html>
+    <body>
+        Hello {{firstName}},
+        Welcome!
+    </body>
+</html>
+```
+
+```js
+const { email:{ sendTemplateEmail } } = parsony.getBundle();
+
+
+const recipient = "john.doe@gmail.com";
+const subject = "Welcome to Parsony.";
+const data = {firstName:'John'};
+const template = 'hello.html';
+
+sendTemplateEmail(recipient,subject,data,template)
+
+```
+
+### SMS
+Send SMS messages using Twilio. To send SMS you must have a Twilio account configured.
+If in debug mode, a failed SMS will be sent as an email
+to the debug email address. This allows for SMS development before connecting
+a Twilio account.
+```js
+const { sms:{ send } } = parsony.getBundle();
+
+
+const recipient = "+15551234321";
+const message = "Welcome to Parsony.";
+
+
+send(recipient,message);
+```
+
+### Errors
