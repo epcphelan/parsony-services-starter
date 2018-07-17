@@ -313,8 +313,8 @@ Return endpoint-level API documentation by passing ```hint:true``` and omitting
 the args object.
 **Note:** must be running with ```api_debug: true```.
 
+Request:
 ```$xslt
-// Request
 -H "Content-Type:application/json"
 -H "Api-Key : <API Key>"
 -H "Session-Token : <Session Token>"
@@ -324,8 +324,51 @@ the args object.
     "hint": true
 }
 
-// Response
+```
 
+Returns:
+```$xslt
+{
+    "success": true,
+    "error": null,
+    "data": {
+        "api_expects": {
+            "method": "post",
+            "service": "user",
+            "json_api": "user.login",
+            "RESTUrl": "/user/login",
+            "desc": "Authenticates user and creates a new session.",
+            "authentication": {
+                "api_key": true,
+                "session_token": false
+            },
+            "params": [
+                {
+                    "param": "username",
+                    "required": true,
+                    "validation": {
+                        "is_type": "string",
+                        "valid_email": true
+                    }
+                },
+                {
+                    "param": "password",
+                    "required": true,
+                    "validation": {
+                        "is_type": "string",
+                        "min_length": "6"
+                    }
+                }
+            ],
+            "returns": {
+                "userId":1234
+            },
+            "errors": [
+                "authentication_failed"
+            ]
+        }
+    }
+}
 ```
 
 ## Models

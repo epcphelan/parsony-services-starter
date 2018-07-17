@@ -21,16 +21,11 @@
       }
     },
     {
-      "RESTUrl": "/parsony/error",
+      "RESTUrl": "/api/errors",
       "method": "get",
-      "json_api": "parsony.error",
-      "desc": "Default error response object.",
-      "handler": "error",
-      "authentication": {
-        "api_key": false,
-        "session_token": false
-      },
-      "params": [],
+      "json_api": "api.errors",
+      "desc": "Default error responses.",
+      "handler": "errors",
       "returns": {}
     }
   ]
