@@ -230,19 +230,6 @@ describe('API End-to-End', function(){
         })
     });
 
-    it('should fail REST GET not found request',function(done){
-      const app = getApp();
-      request(app)
-        .get('/parsony/error')
-        .end((err,res)=>{
-          expect(res.status).to.equal(200);
-          expect(res.body.success).to.equal(false);
-          expect(res.body.error.code).to.equal(404);
-          expect(res.body.error.type).to.equal('record_not_found');
-          done();
-        })
-    });
-
     it('should reject no args supplied',function(done){
       const app = getApp();
       request(app)
