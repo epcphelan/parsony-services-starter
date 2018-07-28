@@ -364,7 +364,7 @@ describe('API End-to-End', function(){
           .end((err, res) => {
             expect(res.status).to.equal(200);
             expect(res.body.success).to.equal(true);
-            expect(res.body.data).to.have.property('sessionToken');
+            expect(res.body.data).to.have.property('userId');
             _setSession(res.body.data);
             done();
           })

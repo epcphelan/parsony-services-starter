@@ -55,7 +55,7 @@ describe('JSON Gate: Unit',function(){
         "message": "Invalid JSON.",
         "detail": "API received malformed or invalid JSON."
       },
-      "data": {}
+      "data": null
     };
     appWithMalformedJson = JSONGate(appWithMalformedJson);
     expect(nextCalled).to.equal(false);

@@ -104,9 +104,7 @@ describe('HTTP Library: Unit',()=>{
         message: 'An error has occurred.',
         detail: 'Server Error.'
       },
-      data: {
-        received: null
-      }
+      data: null
     };
 
     const errorObj = {
